@@ -16,6 +16,7 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderDao orderDao;
 
+
     @Override
     @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public List<Order> getAll() throws DaoExceptions {
