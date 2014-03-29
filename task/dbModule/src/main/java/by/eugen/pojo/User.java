@@ -1,9 +1,12 @@
 package by.eugen.pojo;
 
 import by.eugen.util.Roles;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name="users")
@@ -28,8 +31,12 @@ public class User implements Serializable {
     @Column(name="EXPERIENCE")
     private Integer experience;
 
-    public User(){
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.TRUE)
+    private List<Order> ordersList;
 
+    public List<Order> getOrdersList() {
+        return ordersList;
     }
 
     public Long getId() {

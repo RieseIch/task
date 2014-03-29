@@ -32,9 +32,8 @@ public abstract class GenericDaoImpl<T, PK extends Serializable> implements Gene
         Criteria criteria;
         try {
             criteria = getCriteria();
-//            criteria.setCacheable(true);
             list = criteria.list();
-        } catch (RuntimeException e) {
+        } catch (HibernateException e) {
             throw new DaoExceptions("Error in GenericDaoImpl, find all entities failed.", e);
         }
         return list;
@@ -45,7 +44,7 @@ public abstract class GenericDaoImpl<T, PK extends Serializable> implements Gene
         T t;
         try {
             t = (T) getSession().get(persistentClass, id);
-        } catch (RuntimeException e) {
+        } catch (HibernateException e) {
             throw new DaoExceptions("Error in GenericDaoImpl, find by primary key of entity failed.", e);
         }
         return t;
@@ -55,8 +54,7 @@ public abstract class GenericDaoImpl<T, PK extends Serializable> implements Gene
     public void add(T t) throws DaoExceptions {
         try {
             getSession().persist(t);
-            getSession().flush();
-        } catch (RuntimeException e) {
+        } catch (HibernateException e) {
             throw new DaoExceptions("Error in GenericDaoImpl, add entity failed.", e);
         }
     }
@@ -65,8 +63,7 @@ public abstract class GenericDaoImpl<T, PK extends Serializable> implements Gene
     public void edit(T t) throws DaoExceptions {
         try {
             getSession().merge(t);
-            getSession().flush();
-        } catch (RuntimeException e) {
+        } catch (HibernateException e) {
             throw new DaoExceptions("Error in GenericDaoImpl, edit entity failed.", e);
         }
     }
@@ -77,7 +74,7 @@ public abstract class GenericDaoImpl<T, PK extends Serializable> implements Gene
         try {
             query = getQuery("delete from " + persistentClass.getSimpleName());
             query.executeUpdate();
-        } catch (RuntimeException e) {
+        } catch (HibernateException e) {
             throw new DaoExceptions("Error in GenericDaoImpl, delete entity failed.", e);
         }
     }

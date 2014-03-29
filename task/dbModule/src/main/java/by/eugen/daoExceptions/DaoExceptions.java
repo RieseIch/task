@@ -1,10 +1,9 @@
 package by.eugen.daoExceptions;
 
 
-import org.hibernate.HibernateException;
 import org.apache.log4j.Logger;
 
-public class DaoExceptions extends HibernateException {
+public class DaoExceptions extends Exception {
 
 
     private Exception handlerException;

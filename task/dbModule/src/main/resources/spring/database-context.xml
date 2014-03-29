@@ -63,6 +63,9 @@
         <property name="annotatedClasses">
             <list>
                 <value>by.eugen.pojo.User</value>
+                <value>by.eugen.pojo.Dish</value>
+                <value>by.eugen.pojo.Order</value>
+                <value>by.eugen.pojo.OrderedDishes</value>
             </list>
         </property>
     </bean>
