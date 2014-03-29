@@ -15,19 +15,14 @@ public class App
 {
 
     public static void main( String[] args ) throws DaoExceptions {
-        ApplicationContext context = new ClassPathXmlApplicationContext("spring/database-context.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring/service-context.xml");
 
-        UserDao userDao = (UserDao)context.getBean("userDao");
+        OrderService orderService = (OrderService)context.getBean("orderService");
 
-        List<User> list =  userDao.findAll();
+        List<Order> list =  orderService.getAll();
 
         System.out.println(list.get(0));
 
-        OrderDao orderDao = (OrderDao)context.getBean("orderDao");
-
-        List<Order> listOrder =  orderDao.findAll();
-
-        System.out.println(listOrder.get(0));
 
     }
 }

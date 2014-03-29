@@ -5,6 +5,7 @@ import by.eugen.daoExceptions.DaoExceptions;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -26,7 +27,7 @@ public abstract class GenericDaoImpl<T, PK extends Serializable> implements Gene
         this.persistentClass = persistentClass;
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(propagation = Propagation.MANDATORY)
     public List<T> findAll() throws DaoExceptions {
         List<T> list;
         Criteria criteria;

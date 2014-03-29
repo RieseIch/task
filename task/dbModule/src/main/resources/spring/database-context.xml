@@ -14,11 +14,9 @@
 	    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 	    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <!--Подключение аннотаций-->
     <context:component-scan base-package="by.eugen"/>
     <context:annotation-config/>
 
-    <!--Подключение AOP-->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
@@ -26,12 +24,10 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <!--Подключение ресурсных файлов-->
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations" value="classpath:db.properties"/>
     </bean>
 
-    <!--Бин на hibernate-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${jdbc.driverClassName}"/>
         <property name="url" value="${jdbc.url}"/>
@@ -45,7 +41,6 @@
         </property>
     </bean>
 
-    <!--Бин session factory-->
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="hibernateProperties">
